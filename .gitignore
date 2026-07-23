@@ -19,15 +19,25 @@ Borrados/
 neria/
 
 # ==========================================================
-#  Paquetes y artefactos de compilacion (pesan cientos de MB)
+#  Pruebas: utiles en desarrollo, no se publican
+# ==========================================================
+test_*.py
+
+# ==========================================================
+#  Version .exe (PyInstaller): el proyecto se distribuye
+#  solo como paquete portatil
+# ==========================================================
+build/
+dist/
+*.spec
+
+# ==========================================================
+#  Paquetes portatiles (pesan cientos de MB: van en Releases)
 # ==========================================================
 portable/SapoPartero/
 portable/SapoPartero_dist/
 portable/SapoPartero*.zip
 portable/python-*-embed-amd64.zip
-build/
-dist/
-*.spec
 
 # Copias que deja el actualizador al instalar una version nueva
 version_anterior_*/

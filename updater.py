@@ -24,8 +24,8 @@ import urllib.error
 VERSION = "1.2.0"
 
 # --- Repositorio de GitHub (rellenar con el repo real) ---
-GITHUB_USER = "CAMBIAR_USUARIO"
-GITHUB_REPO = "Sapo_partero"
+GITHUB_USER = "barroyegi"
+GITHUB_REPO = "Sapo-partero"
 GITHUB_RAMA = "main"
 
 BASE_RAW = f"https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_RAMA}"
