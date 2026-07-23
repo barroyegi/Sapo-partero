@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from ttkthemes import ThemedTk
+import base64
 import json
 import os
 import pandas as pd
@@ -977,13 +978,51 @@ class AutomationWizard:
             messagebox.showerror("Error", f"No se pudo crear la tarea: {e}")
 
 
+def _notificar(mensaje):
+    """Aviso emergente que se cierra solo al minuto.
+
+    Se usa en la ejecución desatendida: si nadie lo cierra, no puede quedarse
+    bloqueando la tarea programada. El mensaje se pasa codificado para que los
+    saltos de línea y las comillas no rompan el comando.
+    """
+    literal = "'" + str(mensaje).replace("'", "''") + "'"
+    ps = ("$w = New-Object -ComObject WScript.Shell; "
+          f"$w.Popup({literal}, 60, 'Sapo Partero', 0)")
+    try:
+        codificado = base64.b64encode(ps.encode("utf-16-le")).decode("ascii")
+        subprocess.run(["powershell", "-NoProfile", "-EncodedCommand", codificado])
+    except Exception as e:
+        print(f"No se pudo mostrar el aviso: {e}")
+
+
+def _ronda_automatica():
+    """Ejecución desatendida lanzada por la tarea programada de las 09:00."""
+    automation_script.main()
+
+    # La actualización se instala al terminar, nunca antes: así la ronda del día
+    # no se ve afectada y la siguiente ya se ejecuta con el código nuevo. Sin
+    # esto, quien no abre nunca la ventana se quedaría anclado a su versión.
+    aviso = ""
+    try:
+        info = updater.comprobar_actualizacion(log=lambda m: None)
+        if info:
+            registro = []
+            if updater.descargar_actualizacion(info, log=registro.append):
+                aviso = (f"\n\nSe ha instalado la versión {info.get('version')}. "
+                         f"Se usará en la próxima ejecución.")
+            else:
+                aviso = ("\n\nHay una versión nueva, pero no se ha podido instalar. "
+                         "Abre la aplicación para intentarlo de nuevo.")
+    except Exception:
+        pass  # Un fallo al actualizar nunca debe estropear la ronda ya completada
+
+    _notificar(f"El sapo ha terminado su ronda automática.{aviso}")
+
+
 if __name__ == "__main__":
     _ensure_plantilla()
     if "--auto" in sys.argv:
-        automation_script.main()
-        cmd = ("powershell -Command \"$w = New-Object -ComObject WScript.Shell; "
-               "$w.Popup('El sapo ha terminado su ronda automática.', 60, 'Sapo Partero', 0)\"")
-        subprocess.run(cmd, shell=True)
+        _ronda_automatica()
     else:
         root = ThemedTk(theme="equilux")
         app = AutomationWizard(root)

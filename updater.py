@@ -21,7 +21,7 @@ import urllib.error
 
 # --- Versión actual de la aplicación ---
 # Subir este número al publicar cambios, y reflejarlo en el version.json del repo.
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 
 # --- Repositorio de GitHub (rellenar con el repo real) ---
 GITHUB_USER = "barroyegi"

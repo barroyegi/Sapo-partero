@@ -1,14 +1,11 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "fecha": "2026-07-23",
   "cambios": [
-    "Kelio: se pueden consultar fechas de meses anteriores (antes solo el mes en curso).",
-    "Kelio: corregida la deteccion del marco del calendario, que fallaba de forma intermitente.",
-    "Credenciales: se ignoran los espacios sobrantes al copiar y pegar.",
-    "Aviso claro si el usuario o la contrasena de Kelio son incorrectos.",
-    "JUMP: corregido el fallo al elegir partidas numericas (2.1, 12.1...).",
-    "JUMP: el proyecto se busca por parecido; si ninguno se parece lo bastante, se salta el dia en vez de imputar a otro.",
-    "Los errores de espera ahora dicen que elemento faltaba, en vez del volcado de chromedriver."
+    "La ejecucion automatica de las 09:00 tambien comprueba si hay version nueva.",
+    "La actualizacion se instala al terminar la ronda, nunca antes, para no afectar al trabajo del dia.",
+    "El aviso de fin de ronda indica si se ha instalado una version nueva.",
+    "Un fallo al actualizar ya no puede impedir que la ronda se complete."
   ],
   "ficheros": [
     "automation_script.py",
