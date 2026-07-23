@@ -1,0 +1,18 @@
+{
+  "version": "1.2.0",
+  "fecha": "2026-07-23",
+  "cambios": [
+    "Kelio: se pueden consultar fechas de meses anteriores (antes solo el mes en curso).",
+    "Kelio: corregida la deteccion del marco del calendario, que fallaba de forma intermitente.",
+    "Credenciales: se ignoran los espacios sobrantes al copiar y pegar.",
+    "Aviso claro si el usuario o la contrasena de Kelio son incorrectos.",
+    "JUMP: corregido el fallo al elegir partidas numericas (2.1, 12.1...).",
+    "JUMP: el proyecto se busca por parecido; si ninguno se parece lo bastante, se salta el dia en vez de imputar a otro.",
+    "Los errores de espera ahora dicen que elemento faltaba, en vez del volcado de chromedriver."
+  ],
+  "ficheros": [
+    "automation_script.py",
+    "gui_app.py",
+    "updater.py"
+  ]
+}

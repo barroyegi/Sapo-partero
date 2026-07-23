@@ -1,0 +1,49 @@
+# ==========================================================
+#  NUNCA subir: credenciales y datos personales
+# ==========================================================
+# config.json guarda usuario y contrasena de Kelio y JUMP en texto plano.
+config.json
+config*.json
+*/config.json
+**/config*.json
+
+# Horas y proyectos imputados de cada usuario
+projects.xlsx
+projects*.xlsx
+**/projects*.xlsx
+
+# Copias de seguridad de los partes borrados (datos personales)
+Borrados/
+
+# Configuraciones de otros usuarios
+neria/
+
+# ==========================================================
+#  Paquetes y artefactos de compilacion (pesan cientos de MB)
+# ==========================================================
+portable/SapoPartero/
+portable/SapoPartero_dist/
+portable/SapoPartero*.zip
+portable/python-*-embed-amd64.zip
+build/
+dist/
+*.spec
+
+# Copias que deja el actualizador al instalar una version nueva
+version_anterior_*/
+
+# ==========================================================
+#  Python
+# ==========================================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ==========================================================
+#  Editor
+# ==========================================================
+.vscode/
+.claude/
+*.code-workspace

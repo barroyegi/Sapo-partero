@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Usuario — Sapo Partero</title>
+  <style>
+    :root {
+      --green-dark: #1b5e20;
+      --green-mid: #2e7d32;
+      --green-light: #4caf50;
+      --green-pale: #e8f5e9;
+      --accent: #f9a825;
+      --red: #b54a4a;
+      --blue: #5a7ab5;
+      --gray-dark: #333;
+      --gray-mid: #666;
+      --gray-light: #f5f5f5;
+      --border: #c8e6c9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--gray-dark);
+      background: #fff;
+      line-height: 1.7;
+    }
+
+    /* ── PORTADA ── */
+    .cover {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+      color: #fff;
+      padding: 60px 40px 50px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      min-height: 240px;
+    }
+
+    .cover img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+    }
+
+    .cover-text h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-text .subtitle {
+      font-size: 1.1rem;
+      opacity: .85;
+      margin-top: 6px;
+    }
+
+    .cover-text .version {
+      font-size: .85rem;
+      opacity: .65;
+      margin-top: 14px;
+    }
+
+    /* ── CONTENIDO ── */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 30px 60px;
+    }
+
+    /* Índice */
+    .toc {
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 28px;
+      margin-bottom: 44px;
+    }
+
+    .toc h2 {
+      color: var(--green-dark);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+    }
+
+    .toc li {
+      margin: 5px 0;
+    }
+
+    .toc a {
+      color: var(--green-mid);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    /* Secciones */
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2.section-title {
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      border-left: 5px solid var(--green-light);
+      padding-left: 14px;
+      margin-bottom: 20px;
+      padding-top: 4px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: var(--green-mid);
+      margin: 24px 0 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    /* Pasos numerados */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      background: var(--gray-light);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      background: var(--green-mid);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Cajas informativas */
+    .box-info,
+    .box-warn,
+    .box-tip,
+    .box-corp {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: .95rem;
+    }
+
+    .box-info {
+      background: #e3f2fd;
+      border-left: 4px solid #1976d2;
+    }
+
+    .box-warn {
+      background: #fff8e1;
+      border-left: 4px solid var(--accent);
+    }
+
+    .box-tip {
+      background: var(--green-pale);
+      border-left: 4px solid var(--green-light);
+    }
+
+    .box-corp {
+      background: #fce4ec;
+      border-left: 4px solid #c62828;
+    }
+
+    .box-info .icon {
+      color: #1976d2;
+      font-size: 1.2rem;
+    }
+
+    .box-warn .icon {
+      color: #f57f17;
+      font-size: 1.2rem;
+    }
+
+    .box-tip .icon {
+      color: var(--green-mid);
+      font-size: 1.2rem;
+    }
+
+    .box-corp .icon {
+      color: #c62828;
+      font-size: 1.2rem;
+    }
+
+    /* Opciones numeradas de solución */
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .options li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .opt-badge {
+      background: var(--green-mid);
+      color: #fff;
+      font-weight: 700;
+      font-size: .8rem;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .opt-badge.opt-b {
+      background: var(--blue);
+    }
+
+    .opt-badge.opt-c {
+      background: #888;
+    }
+
+    .opt-badge.opt-d {
+      background: #666;
+    }
+
+    /* Tabla de columnas Excel */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: .93rem;
+    }
+
+    thead tr {
+      background: var(--green-mid);
+      color: #fff;
+    }
+
+    th,
+    td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--green-pale);
+    }
+
+    .req {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .opt {
+      color: var(--gray-mid);
+    }
+
+    code {
+      background: #f1f8e9;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'Consolas', monospace;
+      font-size: .9em;
+      color: var(--green-dark);
+    }
+
+    /* Botones de muestra */
+    .btn-demo {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: .88rem;
+      border: none;
+      color: #fff;
+    }
+
+    .btn-green {
+      background: var(--green-mid);
+    }
+
+    .btn-blue {
+      background: var(--blue);
+    }
+
+    .btn-red {
+      background: var(--red);
+    }
+
+    .btn-gray {
+      background: #888;
+      color: #fff;
+    }
+
+    .btn-light {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    /* Indicador de estado */
+    .status-ok {
+      color: var(--green-mid);
+      font-weight: 600;
+    }
+
+    .status-warn {
+      color: #f57f17;
+      font-weight: 600;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      background: var(--green-pale);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+
+    .faq-a {
+      padding: 12px 16px;
+      font-size: .93rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: .82rem;
+      color: var(--gray-mid);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    @media print {
+      .cover {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════ PORTADA ══════════════════ -->
+  <div class="cover">
+    <img src="./sapo_partero.png" alt="Sapo Partero logo" onerror="this.style.display='none'" />
+    <div class="cover-text">
+      <h1>Sapo Partero</h1>
+      <div class="subtitle">Guía de Usuario — Automatización de partes de trabajo</div>
+      <div class="version">Versión 1.1 &nbsp;·&nbsp; Nasuvinsa &nbsp;·&nbsp; Autor: Beñat Arroyo</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════════ ÍNDICE ══════════════════ -->
+    <div class="toc">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">¿Qué es Sapo Partero?</a></li>
+        <li><a href="#inicio">Primeros pasos</a></li>
+        <li><a href="#normal">Proceso 1 — Automatización normal</a>
+          <ol style="margin-top:4px;">
+            <li><a href="#proyectos">Gestión de proyectos</a></li>
+            <li><a href="#tarea">Tarea programada diaria</a></li>
+          </ol>
+        </li>
+        <li><a href="#masiva">Proceso 2 — Carga masiva desde Excel</a></li>
+        <li><a href="#borrado">Proceso 3 — Borrado masivo</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ol>
+    </div>
+
+
+    <!-- ══════════════════ 1 INTRODUCCIÓN ══════════════════ -->
+    <section id="intro">
+      <h2 class="section-title">1. ¿Qué es Sapo Partero?</h2>
+      <p>
+        <strong>Sapo Partero</strong> es una herramienta de automatización que conecta
+        <strong>Kelio</strong> (sistema de fichajes) con <strong>JUMP</strong> (sistema de partes
+        de trabajo de Nasuvinsa). Su objetivo es eliminar el trabajo manual de introducir
+        diariamente las horas en JUMP.
+      </p>
+      <p>El programa ofrece tres modos de funcionamiento:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Proceso</th>
+            <th>Para qué sirve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="btn-demo btn-light">▶ Automatización normal</span></td>
+            <td>Lee tus fichajes del día en Kelio y crea automáticamente el parte en JUMP, eligiendo el proyecto
+              disponible según su peso en horas.</td>
+          </tr>
+          <tr>
+            <td><span class="btn-demo btn-blue">📂 Carga masiva</span></td>
+            <td>Lee una hoja Excel con varios partes ya definidos y los envía todos en orden.</td>
+          </tr>
+          <tr>
+            <td><span class="btn-demo btn-red">🗑 Borrado masivo</span></td>
+            <td>Elimina todos los partes dentro de un rango de fechas (por ejemplo, para corregirlos).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="box-info">
+        <span class="icon">ℹ</span>
+        <span>El programa funciona en segundo plano con Chrome invisible. No es necesario tener el navegador
+          abierto.</span>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════ 2 PRIMEROS PASOS ══════════════════ -->
+    <section id="inicio">
+      <h2 class="section-title">2. Primeros pasos</h2>
+
+      <h3>Instalación</h3>
+      <p>Haz doble clic en <code>Sapo partero.exe</code>. No requiere instalación adicional.</p>
+
+      <div class="box-warn">
+        <span class="icon">⚠</span>
+        <div>
+          <strong>SmartScreen de Windows</strong> puede mostrar "Windows protegió tu PC" la primera vez que ejecutes el
+          programa.
+          Haz clic en <strong>Más información</strong> → <strong>Ejecutar de todas formas</strong>.
+          El ejecutable no está firmado digitalmente; esto es normal para herramientas de uso interno.
+          <br /><br />
+          Si la <strong>red corporativa lo pone en cuarentena</strong>, consulta la sección
+          <a href="#corporativo">6. Instalación en entorno corporativo</a>.
+        </div>
+      </div>
+
+      <h3>Paso 1 — Credenciales</h3>
+      <p>La primera pantalla pide los datos de acceso a Kelio y a JUMP. Se guardan en <code>config.json</code> junto al
+        ejecutable para no tener que introducirlos de nuevo.</p>
+
+      <ul class="steps">
+        <li>Introduce tu usuario y contraseña de <strong>Kelio</strong> (los mismos que usas en el portal web).</li>
+        <li>Introduce tu usuario y contraseña de <strong>JUMP</strong> (tu código de empleado y la contraseña habitual).
+        </li>
+        <li>Pulsa <span class="btn-demo btn-gray">Siguiente &gt;</span>.</li>
+      </ul>
+
+      <div class="box-tip">
+        <span class="icon">✔</span>
+        <span>Las credenciales se guardan automáticamente. La próxima vez que abras el programa ya estarán
+          rellenas.</span>
+      </div>
+
+      <h3>Paso 2 — Elige el proceso</h3>
+      <p>
+        Selecciona una de las tres opciones. Al seleccionar <strong>Automatización normal</strong>
+        aparecerá la sección de configuración de proyectos (necesaria para este proceso).
+        Para los otros dos procesos aparecerán sus opciones específicas.
+        Cuando esté todo listo, pulsa <span class="btn-demo btn-gray">Siguiente &gt;</span>.
+      </p>
+    </section>
+
+
+    <!-- ══════════════════ 3 AUTOMATIZACIÓN NORMAL ══════════════════ -->
+    <section id="normal">
+      <h2 class="section-title">3. Proceso 1 — Automatización normal</h2>
+
+      <p>
+        Este proceso es el más habitual. El programa entra en Kelio, obtiene los días que
+        todavía no tienen parte en JUMP y los envía uno a uno, asignando automáticamente
+        el proyecto a imputar según las horas disponibles.
+      </p>
+
+      <div class="box-warn">
+        <span class="icon">⚠</span>
+        <span><strong>Requisito previo:</strong> debes tener al menos un proyecto con horas disponibles configurado
+          antes de ejecutar. Ver <a href="#proyectos">sección 3.1</a>.</span>
+      </div>
+
+      <h3>Pasos para ejecutar</h3>
+      <ul class="steps">
+        <li>
+          En la pantalla de <em>Elige proceso</em>, selecciona <strong>Automatización normal</strong>.
+          Aparecerá la sección <em>"Configuración de proyectos"</em> con el estado actual:
+          <br />
+          <span class="status-ok">✔ 3 proyecto(s) — 2 con horas disponibles</span> (listo para ejecutar)<br />
+          <span class="status-warn">⚠ Sin proyectos configurados</span> (hay que añadir proyectos antes de continuar)
+        </li>
+        <li>Si es necesario, abre <strong>📋 Gestión de Proyectos</strong> para añadir o revisar proyectos. Al cerrar el
+          diálogo el estado se actualiza automáticamente.</li>
+        <li>Pulsa <span class="btn-demo btn-gray">Siguiente &gt;</span>. Si no hay proyectos con horas disponibles, el
+          programa no dejará avanzar.</li>
+        <li>En la pantalla de <em>Ejecución</em>, pulsa <span class="btn-demo btn-light">▶ Salta, sapo!</span>.</li>
+        <li>El <strong>Registro de Actividad</strong> mostrará los pasos en tiempo real: login en JUMP, obtención de
+          fechas, login en Kelio, días encontrados y envío de cada parte.</li>
+        <li>Al terminar aparece un aviso de finalización.</li>
+      </ul>
+
+      <h3>¿Cómo elige el proyecto?</h3>
+      <p>
+        El programa consulta <code>projects.xlsx</code> y hace una selección ponderada:
+        los proyectos con <strong>más horas disponibles</strong> tienen más probabilidad de ser elegidos.
+        Si varios proyectos compiten, el que tenga la <strong>fecha límite más próxima</strong>
+        recibe un peso adicional para asegurar que se consume antes de que caduque.
+      </p>
+      <p>
+        Los proyectos con la fecha límite vencida o sin horas disponibles se excluyen automáticamente.
+      </p>
+
+      <div class="box-info">
+        <span class="icon">ℹ</span>
+        <span>Si el programa no encuentra ningún proyecto con horas suficientes para cubrir el día, ese día se salta y
+          aparece un aviso en el registro. Amplía o añade proyectos en <strong>Gestión de Proyectos</strong>.</span>
+      </div>
+
+      <h3>Detección de vacaciones y teletrabajo</h3>
+      <ul style="padding-left:20px; margin-bottom:12px;">
+        <li><strong>Vacaciones / ausencias:</strong> días sin fichajes en Kelio → se saltan automáticamente, sin enviar
+          parte.</li>
+        <li><strong>Teletrabajo:</strong> si los cuatro fichajes del día son del tipo <em>Presencia intranet</em>, el
+          parte se marca como Teletrabajo en JUMP.</li>
+      </ul>
+
+
+      <!-- ─────────── 3.1 GESTIÓN DE PROYECTOS ─────────── -->
+      <section id="proyectos"
+        style="margin-top:32px; margin-bottom:0; padding-left:16px; border-left:3px solid var(--border);">
+        <h3 style="color:var(--green-dark); font-size:1.15rem; margin-top:0;">3.1 Gestión de proyectos</h3>
+
+        <p>
+          Accesible desde el botón <strong>📋 Gestión de Proyectos</strong> que aparece en el paso 2
+          al seleccionar <em>Automatización normal</em>.
+          Aquí se define el <em>pool</em> de proyectos disponibles para la asignación automática.
+        </p>
+
+        <p>Desde este diálogo puedes:</p>
+        <ul style="padding-left:20px; margin-bottom:12px;">
+          <li><strong>Ver</strong> todos los proyectos con sus horas totales, ejecutadas y disponibles.</li>
+          <li><strong>Añadir</strong> un proyecto con nombre, partida, horas totales y fecha límite opcional.</li>
+          <li><strong>Borrar</strong> un proyecto seleccionándolo y pulsando <em>Borrar Seleccionado</em>.</li>
+          <li><strong>Abrir Excel</strong> directamente para ediciones masivas o avanzadas.</li>
+          <li><strong>Recargar</strong> si has modificado el fichero externamente.</li>
+        </ul>
+
+        <div class="box-tip">
+          <span class="icon">✔</span>
+          <span>El <strong>nombre del proyecto</strong> y la <strong>partida</strong> no tienen que ser exactos: basta
+            con que sean una <em>subcadena</em> del nombre real en JUMP. Por ejemplo, <code>Mantenimiento</code>
+            coincidirá con <code>OT-0042 Mantenimiento edificios</code>.</span>
+        </div>
+
+        <h3 style="color:var(--green-mid);">Estructura de <code>projects.xlsx</code></h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Columna</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Project Name</code></td>
+              <td>Nombre parcial del proyecto tal como aparece en JUMP.</td>
+            </tr>
+            <tr>
+              <td><code>Partida</code></td>
+              <td>Nombre parcial de la partida dentro del proyecto.</td>
+            </tr>
+            <tr>
+              <td><code>Total Hours</code></td>
+              <td>Horas totales asignadas al proyecto.</td>
+            </tr>
+            <tr>
+              <td><code>Executed Hours</code></td>
+              <td>Horas ya imputadas (se actualiza automáticamente al ejecutar).</td>
+            </tr>
+            <tr>
+              <td><code>Available</code></td>
+              <td>Calculado: Total − Ejecutadas. El programa usa este valor para la selección.</td>
+            </tr>
+            <tr>
+              <td><code>Fecha límite</code></td>
+              <td>Opcional. Después de esta fecha el proyecto queda excluido de la selección.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ─────────── 3.2 TAREA PROGRAMADA ─────────── -->
+      <section id="tarea"
+        style="margin-top:32px; margin-bottom:0; padding-left:16px; border-left:3px solid var(--border);">
+        <h3 style="color:var(--green-dark); font-size:1.15rem; margin-top:0;">3.2 Tarea programada diaria (09:00)</h3>
+
+        <p>
+          Para no tener que abrir el programa manualmente cada día, puedes crear una tarea de Windows
+          que ejecute la automatización normal automáticamente a las <strong>09:00</strong>.
+          Esta opción está disponible en la pantalla de <em>Ejecución</em> de la automatización normal.
+        </p>
+
+        <ul class="steps">
+          <li>Selecciona <strong>Automatización normal</strong> y avanza a la pantalla de <em>Ejecución</em>.</li>
+          <li>Haz clic en el botón <span class="btn-demo btn-gray">📅 Crear Tarea Diaria (09:00)</span>, que aparece
+            junto al botón principal.</li>
+          <li>El programa registrará la tarea en el <em>Programador de tareas de Windows</em> bajo el nombre
+            <code>Sapo_partero</code>.
+          </li>
+          <li>A partir de ese momento el programa se ejecutará en silencio cada día a las 09:00 y mostrará un popup al
+            terminar.</li>
+        </ul>
+
+        <div class="box-info">
+          <span class="icon">ℹ</span>
+          <span>Para modificar la hora o desactivar la tarea, abre el <strong>Programador de tareas de Windows</strong>
+            (<code>taskschd.msc</code>) y busca <code>Sapo_partero</code>.</span>
+        </div>
+
+        <div class="box-warn">
+          <span class="icon">⚠</span>
+          <span>La tarea se ejecuta con el usuario de Windows que la crea. Si cambias de contraseña de dominio puede
+            dejar de funcionar. En ese caso, elimínala y vuelve a crearla.</span>
+        </div>
+      </section>
+
+    </section>
+
+
+    <!-- ══════════════════ 4 CARGA MASIVA ══════════════════ -->
+    <section id="masiva">
+      <h2 class="section-title">4. Proceso 2 — Carga masiva desde Excel</h2>
+
+      <p>
+        Permite enviar varios partes de una sola vez a partir de un fichero Excel con la
+        estructura de la <strong>plantilla</strong> (<code>plantilla_partes.xlsx</code>).
+        No modifica el fichero de proyectos (<code>projects.xlsx</code>).
+      </p>
+
+      <h3>Cómo preparar el Excel</h3>
+      <p>Abre <code>plantilla_partes.xlsx</code> y rellena una fila por parte:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Columna</th>
+            <th>Obligatorio</th>
+            <th>Formato</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Fecha</code></td>
+            <td><span class="req">Sí</span></td>
+            <td>Fecha Excel o texto <code>DD/MM/AAAA</code></td>
+            <td>22/06/2026</td>
+          </tr>
+          <tr>
+            <td><code>Proyecto</code></td>
+            <td><span class="req">Sí</span></td>
+            <td>Texto (nombre parcial)</td>
+            <td>Mantenimiento edificios</td>
+          </tr>
+          <tr>
+            <td><code>Partida</code></td>
+            <td><span class="req">Sí</span></td>
+            <td>Texto (nombre parcial)</td>
+            <td>Reformas menores</td>
+          </tr>
+          <tr>
+            <td><code>Cantidad</code></td>
+            <td><span class="req">Sí*</span></td>
+            <td>Hora Excel (<code>hh:mm</code>)</td>
+            <td>7:30</td>
+          </tr>
+          <tr>
+            <td><code>Cantidad2</code></td>
+            <td><span class="opt">No*</span></td>
+            <td>Decimal (horas)</td>
+            <td>7.5</td>
+          </tr>
+          <tr>
+            <td><code>Modo de trabajo</code></td>
+            <td><span class="opt">No</span></td>
+            <td><code>Presencial</code> / <code>Teletrabajo</code></td>
+            <td>Presencial</td>
+          </tr>
+          <tr>
+            <td><code>Observaciones</code></td>
+            <td><span class="opt">No</span></td>
+            <td>Texto libre</td>
+            <td>Revisión trimestral</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="box-info">
+        <span class="icon">ℹ</span>
+        <span><strong>Cantidad vs Cantidad2:</strong> rellena <em>Cantidad</em> con formato hora de Excel
+          (<code>7:30</code>).
+          Si esta columna está vacía o es cero, el programa usará <em>Cantidad2</em> como horas decimales
+          (<code>7.5</code> = 7h 30min). Solo hace falta rellenar una de las dos.</span>
+      </div>
+
+      <h3>Pasos para la carga masiva</h3>
+      <ul class="steps">
+        <li>Selecciona <strong>Carga masiva desde Excel</strong> en la pantalla de <em>Elige proceso</em>.</li>
+        <li>Haz clic en <strong>Examinar…</strong> y selecciona tu Excel relleno.</li>
+        <li>Pulsa <span class="btn-demo btn-gray">Siguiente &gt;</span>. Aparecerá una ventana de
+          <strong>confirmación</strong> con la lista completa de partes que se van a enviar. Revísala antes de
+          confirmar.
+        </li>
+        <li>Pulsa <span class="btn-demo btn-blue">✔ Confirmar y enviar</span> para avanzar.</li>
+        <li>En la pantalla de <em>Ejecución</em>, pulsa <span class="btn-demo btn-blue">▶ Iniciar carga masiva</span>.
+        </li>
+        <li>El registro mostrará el progreso: <code>[1/8] Procesando…</code>, <code>[2/8]…</code>, etc.</li>
+      </ul>
+
+      <div class="box-tip">
+        <span class="icon">✔</span>
+        <span>Las filas sin fecha, sin proyecto o con <strong>0 horas</strong> se saltan automáticamente sin detener el
+          proceso.</span>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════ 5 BORRADO MASIVO ══════════════════ -->
+    <section id="borrado">
+      <h2 class="section-title">5. Proceso 3 — Borrado masivo</h2>
+
+      <p>
+        Elimina de JUMP todos los partes comprendidos entre dos fechas. Útil cuando hay que
+        corregir errores o re-introducir un período completo.
+      </p>
+
+      <div class="box-warn">
+        <span class="icon">⚠</span>
+        <span><strong>Acción irreversible.</strong> Los partes eliminados de JUMP no se pueden recuperar. El programa
+          guarda automáticamente una <strong>copia de seguridad Excel</strong> antes de borrar nada.</span>
+      </div>
+
+      <h3>Copia de seguridad automática</h3>
+      <p>
+        Antes de eliminar, el programa guarda el fichero
+        <code>Borrados\Borrados_AAAAMMDD_AAAAMMDD_HHMMSS.xlsx</code>
+        en la misma carpeta del ejecutable, con todos los datos de los partes encontrados.
+      </p>
+
+      <h3>Pasos para el borrado masivo</h3>
+      <ul class="steps">
+        <li>Selecciona <strong>Borrado masivo</strong> en la pantalla de <em>Elige proceso</em>.</li>
+        <li>Introduce la fecha <strong>Desde</strong> y la fecha <strong>Hasta</strong> en formato
+          <code>DD/MM/AAAA</code>. <strong>Ambas son obligatorias</strong>; si se dejan vacías el programa no deja
+          avanzar.
+        </li>
+        <li>Pulsa <span class="btn-demo btn-gray">Siguiente &gt;</span> y confirma el aviso de advertencia.</li>
+        <li>En la pantalla de <em>Ejecución</em>, pulsa <span class="btn-demo btn-red">🗑 Eliminar partes</span>.</li>
+        <li>El registro mostrará: búsqueda de partes, guardado de copia de seguridad y eliminación.</li>
+      </ul>
+    </section>
+
+
+    <!-- ══════════════════ 6 FAQ ══════════════════ -->
+    <section id="faq">
+      <h2 class="section-title">6. Preguntas frecuentes</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">El programa se abre y se cierra rápidamente sin hacer nada.</div>
+        <div class="faq-a">Asegúrate de que <code>config.json</code> y <code>projects.xlsx</code> están en la misma
+          carpeta que el ejecutable. Si faltan, el programa no puede arrancar.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">El registro dice "No se han encontrado días para reportar".</div>
+        <div class="faq-a">Ya tienes todos los partes al día en JUMP. No hay nada que hacer.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">El registro dice "No he encontrado proyectos con horas suficientes".</div>
+        <div class="faq-a">Todos los proyectos en <code>projects.xlsx</code> tienen las horas agotadas o la fecha límite
+          vencida. Añade un proyecto nuevo o amplía las horas de uno existente en <strong>Gestión de Proyectos</strong>
+          (accesible en el paso 2, al seleccionar Automatización normal).</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">En el paso 2 aparece "⚠ Sin proyectos configurados" aunque sé que tengo el Excel.</div>
+        <div class="faq-a">El fichero <code>projects.xlsx</code> debe estar en la misma carpeta que el ejecutable. Si
+          está en otra ubicación, cópialo junto al <code>.exe</code> y vuelve a seleccionar <em>Automatización
+            normal</em>.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">El registro muestra ⚠ con "no encontrado — seleccionado por defecto".</div>
+        <div class="faq-a">El nombre del proyecto o partida en <code>projects.xlsx</code> no coincide con el que aparece
+          en JUMP. Corrige el nombre en <strong>Gestión de Proyectos</strong> para que sea una subcadena del nombre real
+          en JUMP (no hace falta el nombre completo).</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">La carga masiva dice "horas 00:00 — saltando".</div>
+        <div class="faq-a">La fila no tiene ningún valor de horas válido ni en <em>Cantidad</em> ni en
+          <em>Cantidad2</em>. Rellena al menos una de las dos columnas.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">El borrado masivo no encuentra partes aunque sé que existen.</div>
+        <div class="faq-a">Comprueba que las fechas están en formato <code>DD/MM/AAAA</code> y que el rango es correcto.
+          JUMP usa la fecha de la jornada de trabajo reportada, no de cuando se genera el parte.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Dónde está la copia de seguridad de los partes borrados?</div>
+        <div class="faq-a">En la carpeta <code>Borrados\</code> dentro del directorio del ejecutable. El fichero tiene
+          el nombre <code>Borrados_AAAAMMDD_AAAAMMDD_HHMMSS.xlsx</code>.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Puedo usar el ordenador mientras el programa está corriendo?</div>
+        <div class="faq-a">Sí. El navegador opera en modo invisible (<em>headless</em>) y no necesita estar en pantalla.
+          Puedes seguir trabajando con normalidad.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Necesito reportar un parte con observaciones específicas.</div>
+        <div class="faq-a">Usa la <strong>Carga masiva</strong> y rellena la columna <em>Observaciones</em> en el Excel.
+          En la automatización normal siempre se usa "<code>.</code>" como observación por defecto.</div>
+      </div>
+
+
+      <div class="faq-item">
+        <div class="faq-q">El antivirus corporativo bloqueó el ejecutable.</div>
+        <div class="faq-a">Se debe esperar un día (a veces menos) para que el programa salga de cuarentena. Sólo sucede
+          en la primera ejecución.</div>
+      </div>
+
+    </section>
+
+  </div><!-- /content -->
+
+  <footer>
+    Sapo Partero &nbsp;·&nbsp; Nasuvinsa &nbsp;·&nbsp; Documento interno de uso exclusivo &nbsp;·&nbsp; Autor: Beñat
+    Arroyo
+  </footer>
+
+</body>
+
+</html>
